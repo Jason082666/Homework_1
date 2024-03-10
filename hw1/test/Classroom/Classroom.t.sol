@@ -11,7 +11,7 @@ interface IStudentV1 {
 }
 
 contract ClassroomV1 {
-    uint256 public code = 1000;
+    uint256 public code = 123;
     bool public isEnrolled;
 
     function enroll(address student) public {
@@ -29,7 +29,7 @@ interface IStudentV2 {
 }
 
 contract ClassroomV2 {
-    uint256 public code = 1000;
+    uint256 public code = 123;
     bool public isEnrolled;
 
     function enroll(address student) public {
@@ -47,7 +47,7 @@ interface IStudentV3 {
 }
 
 contract ClassroomV3 {
-    uint256 public code = 1000;
+    uint256 public code = 123;
     bool public isEnrolled;
 
     function enroll(address student) public {

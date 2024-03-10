@@ -7,6 +7,7 @@ contract StudentV1 {
 
     function register() external returns (uint256) {
         // TODO: please add your implementaiton here
+        return 123;
     }
 }
 
@@ -18,6 +19,7 @@ interface IClassroomV2 {
 contract StudentV2 {
     function register() external view returns (uint256) {
         // TODO: please add your implementaiton here
+        return 123;
     }
 }
 
@@ -25,5 +27,6 @@ contract StudentV2 {
 contract StudentV3 {
     function register() external view returns (uint256) {
         // TODO: please add your implementaiton here
+        return 123;
     }
 }
