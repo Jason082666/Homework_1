@@ -19,16 +19,14 @@ contract StudentV1 {
 }
 
 /* Problem 2 Interface & Contract */
+// 由於 constructor 沒辦法帶入參數，只好先直接觀察 studentV2 地址，並且把他直接寫進程式碼當中。
 interface IClassroomV2 {
     function isEnrolled() external view returns (bool);
 }
 
 contract StudentV2 {
-    IClassroomV2 public classroom;
-
-    constructor(address _classroomAddress) {
-        classroom = IClassroomV2(_classroomAddress);
-    }
+    address constant classroomAddress = 0x2e234DAe75C793f67A35089C9d99245E1C58470b; 
+    IClassroomV2 classroom = IClassroomV2(classroomAddress);
 
     function register() external view returns (uint256) {
         if (classroom.isEnrolled()) {
@@ -41,9 +39,13 @@ contract StudentV2 {
 
 
 /* Problem 3 Interface & Contract */
-
+// 利用 gasleft 去做判段，先去觀察一次消耗的 gas 臨界點。
 contract StudentV3 {
     function register() external view returns (uint256) {
-        return 1000;
+       if (gasleft() > 6650) {
+        return gasleft();
+       } else {
+        return 123;
+       }
     }
 }

